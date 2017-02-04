@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  devtool: 'eval',
+  devtool: '#inline-source-map', // 'eval' for production
   entry: [
     'webpack-dev-server/client?http://localhost:3000',
     './src/index.jsx'
@@ -21,7 +21,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ['style', 'css', 'sass']
       }
     ]
   }
