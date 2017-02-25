@@ -1,0 +1,40 @@
+.UserPrivacyBlock {
+    height: 100%;
+    position: relative;
+    &-AvatarBox {
+        position: absolute;
+        height: 100%;
+        width: 65px;
+        right: 0;
+        cursor: pointer;
+        &-Image {
+            height: 60px;
+            width: 60px;
+        }
+        &-Status {
+            display: inline-block;
+            background: limegreen;
+            width: 5px;
+            height: 100%;
+        }
+    }
+    &-UserName {
+        padding: 20px 15px;
+        &-Text {
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            height: 20px;
+            &:after {
+                content: "";
+                position: absolute;
+                border: 5px solid transparent;
+                border-top: 5px solid white;
+                top: 5px;
+                right: -15px;
+            }
+        }
+    }
+}

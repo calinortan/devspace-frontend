@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import NotificationAlert from './components/NotificationAlert.jsx'
+import UserPrivacyBlock from './components/UserPrivacyBlock.jsx'
 
 class Header extends Component {
   constructor(props) {
@@ -40,7 +41,9 @@ class Header extends Component {
           {this.renderNotificationsIcon()}
         </div>
         <div className='Header-Block Header-User'>
-            
+          <UserPrivacyBlock
+            user={this.props.user}
+          />
         </div>
       </div>
     );
