@@ -1,5 +1,4 @@
 .Header {
-    // height: 60px;
     width: 100%;
     background: #32b38c;
     font-family: Arial, Helvetica, sans-serif;
@@ -11,6 +10,11 @@
         box-sizing: border-box;
         border-right: 1px solid #88c3a5;
         vertical-align: top;
+        @media only screen and (max-width: 480px) {
+            max-width: 50%;
+            min-width: auto;
+            border: none;
+        }
     }
     &-Text {
         color: white;
@@ -47,11 +51,17 @@
                 top: -4px;
             }
         }
+        @media only screen and (max-width: 480px) {
+            padding: 17.5px 1%; 
+        }
     }
     &-User {
         border-left: 1px solid #88c3a5;
         position: absolute;
         right: 0;
+        @media only screen and (max-width: 480px) {
+            display: none;
+        }
     }
 }
 

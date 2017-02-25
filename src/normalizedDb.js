@@ -1,6 +1,24 @@
 export const db = [
     {
         "date": "2016/12/14 2:45:01 p.m. EET",
+        "name": "Calin Ortan",
+        "email": "calinortan@test.com",
+        "avatar": "https://www.linkedin.com/mpr/mpr/AAEAAQAAAAAAAAkkAAAAJGRlN2I3NjNjLWI5MzQtNDYyMy04ZTMxLWQ4OTRkZjlhOTQ5MA.jpg",
+        "age": 25,
+        "location": "Cluj-Napoca",
+        "interests": [],
+        "workplace": "Softvision",
+        "programmingLanguages": [
+            "Javscript",
+            "Java",
+            "Python"
+        ],
+        "computerOS": "Windows",
+        "mobileOS": "Android",
+        "connections": []
+    },
+    {
+        "date": "2016/12/14 2:45:01 p.m. EET",
         "name": "Rares Teodorescu",
         "email": "raresteodorescu48@test.com",
         "avatar": "",
@@ -963,7 +981,7 @@ export const db = [
         "age": 31,
         "location": "Cluj-Napoca",
         "interests": [],
-        "workplace": "SoftVision",
+        "workplace": "Softvision",
         "programmingLanguages": [
             "Java",
             "Android",

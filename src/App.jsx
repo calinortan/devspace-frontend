@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Header from './components/header/Header.jsx';
 import {db} from './normalizedDb.js';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.wsConn = io('http://localhost:3000');
+    // this.wsConn = io('http://localhost:3000', {
+    //   reconnectionAttempts: 3,
+    //   reconnectionDelay: 2000
+    // });
   }
   render() {
     return (
