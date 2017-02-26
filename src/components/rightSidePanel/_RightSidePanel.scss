@@ -1,0 +1,13 @@
+.RightSidePanel {
+    width: 200px;
+    background-color: #f7f6f1;
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    right: 0;
+    border-left: 1px solid #9c9b97;
+    box-sizing: border-box;
+    @media only screen and (max-width: 1023px) {
+        display: none;
+    }
+}
