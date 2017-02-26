@@ -27,7 +27,9 @@ class ProfileCard extends Component {
     return <div className={'ProfileCard'}>
         {this.getUserAvatar()}
         <div className={'ProfileCard-UserName'}>
-            {this.props.user.name}
+            <span className={'ProfileCard-UserName-Text'}>
+              {this.props.user.name}
+            </span>
         </div>
         <div className={'ProfileCard-Workplace'}>
             {this.props.user.workplace}

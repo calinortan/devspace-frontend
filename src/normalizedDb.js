@@ -59,7 +59,7 @@ export const db = [
         "date": "2016/12/14 2:51:53 p.m. EET",
         "name": "Vlad Tamas",
         "email": "vladtamas26@test.com",
-        "avatar": "",
+        "avatar": "https://scontent.fomr1-1.fna.fbcdn.net/v/t1.0-9/1780611_411366915675685_941003318_n.jpg?oh=2b2d93cdc67b1a06643120c5d6f86971&oe=5970AA01",
         "age": 24,
         "location": "Cluj-Napoca",
         "interests": [

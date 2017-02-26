@@ -19,20 +19,27 @@ class App extends Component {
     return (
       <div>
         <Header
-          user={db[0]}
+          user={db[this.props.params.id || 0]}
           hasNewMessages={true}
           hasNotifications={true}
         />
         <div className={'App-Content'}>
           <LeftSidePanel
-            user={db[0]}
+            user={db[this.props.params.id || 0]}
             isOwnProfile={true}
           />
           <RightSidePanel/>
-          <ContentContainer/>
+          <ContentContainer>
+            {this.props.children}
+          </ContentContainer>
         </div>
       </div>
     );
   }
+}
+
+App.propTypes = {
+  children: React.PropTypes.element,
+  params: React.PropTypes.object
 }
 export default App;
