@@ -24,7 +24,10 @@ class App extends Component {
           hasNotifications={true}
         />
         <div className={'App-Content'}>
-          <LeftSidePanel/>
+          <LeftSidePanel
+            user={db[0]}
+            isOwnProfile={true}
+          />
           <RightSidePanel/>
           <ContentContainer/>
         </div>

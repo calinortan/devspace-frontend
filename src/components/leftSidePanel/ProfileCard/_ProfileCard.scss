@@ -1,0 +1,54 @@
+.ProfileCard {
+    background: #292929;
+    &-UserName {
+        position: relative;
+        font-size: 30px;
+        padding: 10px 20px;
+        border-top: 1px solid #393836;
+
+        &:after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            -moz-border-radius: 7.5px;
+            -webkit-border-radius: 7.5px;
+            border-radius: 7.5px;
+            background-color: limegreen;
+            right: 50px;
+            top: 20px;
+        }
+    }
+    &-Avatar {
+        width:220px;
+        height: 220px;
+        border-radius: 110px;
+        display: block;
+        box-sizing: border-box;
+        margin: 0px auto 0px auto;
+        padding: 20px
+    }
+    &-Workplace {
+        padding: 5px 0 5px 20px;
+        color: darkgray;
+        font-size: 18px;
+        border-top: 1px solid #393836;
+    }
+    &-Actions {
+        padding: 10px 0 10px 20px;
+        box-sizing: border-box;
+        border-top: 1px solid #393836;
+        &-Relation {
+            margin-right: 20px;
+            width: 100px;
+            color: white;
+            background: #32b38c;
+        }
+        &-Chat {
+            width: 70px;
+            background-color: inherit;
+            border: 1px solid darkgray;
+            color: darkgray;
+        }
+    }
+}

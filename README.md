@@ -29,5 +29,5 @@ npm run lint
 
 ### Todos
 
--UserPrivacy block from top right corner
 -SearchBar - Header
+-Add Routes: /:userID, /home

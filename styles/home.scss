@@ -3,8 +3,12 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
-h1 {
-  color: tomato;
+button {
+  display: inline-block;
+  border: none;
+  height: 30px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 .App-Content {
   margin-top: 60px;
