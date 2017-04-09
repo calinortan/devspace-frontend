@@ -15,6 +15,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import RequireAuth from './components/auth/RequireAuth';
 import SignIn from './components/auth/SignIn.jsx';
+import { AUTH_USER } from './actions/ActionTypes'
 
 const store = createStore(reducers, applyMiddleware(reduxThunk));
 const theme = getMuiTheme(darkBaseTheme, {
@@ -23,6 +24,13 @@ const theme = getMuiTheme(darkBaseTheme, {
     primary2Color: '#32b38c'
   }
 });
+
+const token = localStorage.getItem('devspace:token');
+// If we have a token, consider the user to be signed in
+if (token) {
+  // we need to update application state
+  store.dispatch({ type: AUTH_USER });
+}
 
 const UserList = () => {
   return <div>

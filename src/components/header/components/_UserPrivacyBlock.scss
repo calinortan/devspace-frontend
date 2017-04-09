@@ -1,12 +1,13 @@
 .UserPrivacyBlock {
     height: 100%;
     position: relative;
+    cursor: pointer;
+    display: block;
     &-AvatarBox {
         position: absolute;
         height: 100%;
         width: 65px;
         right: 0;
-        cursor: pointer;
         &-Image {
             height: 60px;
             width: 60px;
@@ -24,7 +25,6 @@
             color: white;
             font-size: 13px;
             font-weight: bold;
-            cursor: pointer;
             position: relative;
             display: inline-block;
             height: 20px;
