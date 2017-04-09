@@ -43,7 +43,10 @@ class UserPrivacyBlock extends Component {
     });
   }
   handleSignOut() {
-    
+    this.setState({
+      isOpen: false
+    });
+    this.props.onSignOut();
   }
   render() {
     return <div
@@ -71,6 +74,7 @@ class UserPrivacyBlock extends Component {
 }
 
 UserPrivacyBlock.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  onSignOut: PropTypes.func
 }
 export default UserPrivacyBlock;

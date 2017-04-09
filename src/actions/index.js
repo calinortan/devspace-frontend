@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router'
-import { AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH } from './ActionTypes';
+import { AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, UNAUTH_USER } from './ActionTypes';
 
 export function signInUser({ email, password }) {
   // redux-thunk allows our action creators to return a function instead of an object
@@ -10,7 +10,7 @@ export function signInUser({ email, password }) {
     dispatch(submittingForm(true));
     axios.post('https://young-springs-34209.herokuapp.com/api/v1/session', { email, password })
       .then(response => {
-        dispatch(submittingForm(true));
+        dispatch(submittingForm(false));
         dispatch({ type: AUTH_USER });
 
         localStorage.setItem('devspace:token', response.data.token);
@@ -22,6 +22,11 @@ export function signInUser({ email, password }) {
         dispatch(authError('Bad Login Info'));
       });
   }
+}
+
+export function signOutUser() {
+  localStorage.removeItem('devspace:token');
+  return { type: UNAUTH_USER };
 }
 
 export function authError(err) {

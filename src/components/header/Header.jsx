@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import NotificationAlert from './components/NotificationAlert.jsx'
 import UserPrivacyBlock from './components/UserPrivacyBlock.jsx'
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 class Header extends Component {
   constructor(props) {
@@ -15,7 +17,7 @@ class Header extends Component {
   renderMessageIcon() {
     if (this.state.hasNewMessages) {
       return <div className='Header-Events-Message'>
-        <NotificationAlert notificationsNumber = {2}></NotificationAlert>
+        <NotificationAlert notificationsNumber={2}></NotificationAlert>
       </div>;
     }
     return <div className='Header-Events-Message'></div>;
@@ -24,13 +26,14 @@ class Header extends Component {
   renderNotificationsIcon() {
     if (this.state.hasNotifications) {
       return <div className='Header-Events-Notifications'>
-        <NotificationAlert notificationsNumber = {3}></NotificationAlert>
+        <NotificationAlert notificationsNumber={3}></NotificationAlert>
       </div>;
     }
     return <div className='Header-Events-Notifications'></div>;
   }
 
   render() {
+    const { user, signOutUser } = this.props
     return (
       <div className='Header'>
         <div className='Header-Text Header-Block'>
@@ -43,7 +46,8 @@ class Header extends Component {
         </div>
         <div className='Header-Block Header-User'>
           <UserPrivacyBlock
-            user={this.props.user}
+            user={user}
+            onSignOut={signOutUser}
           />
         </div>
       </div>
@@ -54,6 +58,7 @@ class Header extends Component {
 Header.propTypes = {
   user: PropTypes.object,
   hasNewMessages: PropTypes.bool,
-  hasNotifications: PropTypes.bool
+  hasNotifications: PropTypes.bool,
+  signOutUser: PropTypes.func
 }
-export default Header;
+export default connect(null, actions)(Header);
