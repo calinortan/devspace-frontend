@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function NotificationAlert(props)  {
   return (
@@ -7,6 +8,6 @@ function NotificationAlert(props)  {
 }
 
 NotificationAlert.propTypes = {
-  notificationsNumber: React.PropTypes.number
+  notificationsNumber: PropTypes.number
 }
 export default NotificationAlert;

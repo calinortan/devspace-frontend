@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class ContentContainer extends Component {
   constructor(props) {
@@ -12,6 +13,6 @@ class ContentContainer extends Component {
 }
 
 ContentContainer.propTypes = {
-  children: React.PropTypes.element
+  children: PropTypes.element
 }
 export default ContentContainer;

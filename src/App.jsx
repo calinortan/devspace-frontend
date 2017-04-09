@@ -4,6 +4,7 @@ import {db} from './normalizedDb.js';
 import LeftSidePanel from './components/leftSidePanel/LeftSidePanel.jsx';
 import RightSidePanel from './components/rightSidePanel/RightSidePanel.jsx';
 import ContentContainer from './components/contentContainer/ContentContainer.jsx';
+import PropTypes from 'prop-types';
 // import io from 'socket.io-client';
 
 class App extends Component {
@@ -39,7 +40,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: React.PropTypes.element,
-  params: React.PropTypes.object
+  children: PropTypes.element,
+  params: PropTypes.object
 }
 export default App;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class UserPrivacyBlock extends Component {
     constructor(props) {
         super(props);
-        console.log(props.user);
     }
 
     getAvatarBox() {
@@ -36,6 +36,6 @@ class UserPrivacyBlock extends Component {
 }
 
 UserPrivacyBlock.propTypes = {
-    user: React.PropTypes.object
+    user: PropTypes.object
 }
 export default UserPrivacyBlock;

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NotificationAlert from './components/NotificationAlert.jsx'
 import UserPrivacyBlock from './components/UserPrivacyBlock.jsx'
+import PropTypes from 'prop-types';
 
 class Header extends Component {
   constructor(props) {
@@ -51,8 +52,8 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  user: React.PropTypes.object,
-  hasNewMessages: React.PropTypes.bool,
-  hasNotifications: React.PropTypes.bool
+  user: PropTypes.object,
+  hasNewMessages: PropTypes.bool,
+  hasNotifications: PropTypes.bool
 }
 export default Header;

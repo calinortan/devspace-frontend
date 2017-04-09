@@ -3,6 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import TextField from 'material-ui/TextField';
+import CircularProgress from 'material-ui/CircularProgress';
+import PropTypes from 'prop-types';
 
 class SignIn extends Component {
   constructor(props) {
@@ -26,7 +28,18 @@ class SignIn extends Component {
     );
   }
 
-  renderField({ input, placeholder, type, meta: { dirty, touched, error } }) {
+  renderSpinner() {
+    if (!this.props.isSubmittingAuth) {
+      return null;
+    }
+    return (
+      <div className='SignIn-Form-Spinner'>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  renderField({ disabled, input, placeholder, type, meta: { dirty, touched, error } }) {
     return (
       <TextField
         floatingLabelText={placeholder}
@@ -34,23 +47,25 @@ class SignIn extends Component {
         {...input}
         type={type}
         errorText={touched && dirty && error}
+        disabled={disabled}
       />
     );
   }
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, isSubmittingAuth } = this.props;
     return (
       <div className={'SignIn'}>
         <h1 className={'SignIn-Message'}>Sign into your <span style={{color:'#32b38c'}}>DEVSPACE</span></h1>
         <form onSubmit={handleSubmit(this.handleFormSubmit)} className={'SignIn-Form'}>
           <div>
-            <Field name="email" type="email" placeholder="email" component={this.renderField} />
+            <Field name="email" type="email" placeholder="email" component={this.renderField} disabled={isSubmittingAuth}/>
           </div>
           <div>
-            <Field name="password" type="password" placeholder="password" component={this.renderField} autoComplete='false'/>
+            <Field name="password" type="password" placeholder="password" component={this.renderField} disabled={isSubmittingAuth}/>
           </div>
-          <button action="submit" className="SignIn-Form-SubmitButton" disabled={submitting}>SIGN IN</button>
+          <button action="submit" className="SignIn-Form-SubmitButton" disabled={isSubmittingAuth}>SIGN IN</button>
           {this.renderAlert()}
+          {this.renderSpinner()}
         </form>
       </div>
     )
@@ -59,16 +74,17 @@ class SignIn extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    errorMessage: state.auth.error
+    errorMessage: state.auth.error,
+    isSubmittingAuth: state.auth.isSubmittingAuth
   }
 }
 
 SignIn.propTypes = {
-  errorMessage: React.PropTypes.string,
-  fields: React.PropTypes.array,
-  handleSubmit: React.PropTypes.func,
-  signInUser: React.PropTypes.func,
-  submitting: React.PropTypes.bool
+  errorMessage: PropTypes.string,
+  fields: PropTypes.array,
+  handleSubmit: PropTypes.func,
+  signInUser: PropTypes.func,
+  isSubmittingAuth: PropTypes.bool
 }
 
 const validate = ({ password, email }) => {

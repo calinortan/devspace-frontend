@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class RightSidePanel extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class RightSidePanel extends Component {
 }
 
 RightSidePanel.propTypes = {
-  user: React.PropTypes.object,
-  hasNewMessages: React.PropTypes.bool,
-  hasNotifications: React.PropTypes.bool
+  user: PropTypes.object,
+  hasNewMessages: PropTypes.bool,
+  hasNotifications: PropTypes.bool
 }
 export default RightSidePanel;

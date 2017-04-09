@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ProfileCard from './ProfileCard/ProfileCard.jsx';
+import PropTypes from 'prop-types';
 
 class LeftSidePanel extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class LeftSidePanel extends Component {
 }
 
 LeftSidePanel.propTypes = {
-  user: React.PropTypes.object,
-  isOwnProfile: React.PropTypes.bool
+  user: PropTypes.object,
+  isOwnProfile: PropTypes.bool
 }
 export default LeftSidePanel;

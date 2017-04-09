@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class ProfileCard extends Component {
   constructor(props) {
@@ -40,6 +41,6 @@ class ProfileCard extends Component {
 }
 
 ProfileCard.propTypes = {
-  user: React.PropTypes.object
+  user: PropTypes.object
 }
 export default ProfileCard;
