@@ -39,20 +39,20 @@ class SignIn extends Component {
     );
   }
 
-  renderField({ disabled, input, placeholder, type, meta: { dirty, touched, error } }) {
+  renderField({ disabled, input, placeholder, submitFailed, type, meta: { dirty, touched, error } }) {
     return (
       <TextField
         floatingLabelText={placeholder}
         floatingLabelFixed={false}
         {...input}
         type={type}
-        errorText={touched && dirty && error}
+        errorText={((touched && dirty) || submitFailed) && error}
         disabled={disabled}
       />
     );
   }
   render() {
-    const { handleSubmit, isSubmittingAuth } = this.props;
+    const { handleSubmit, isSubmittingAuth, invalid } = this.props;
     return (
       <div className={'SignIn'}>
         <h1 className={'SignIn-Message'}>Sign into your <span style={{color:'#32b38c'}}>DEVSPACE</span></h1>
@@ -63,7 +63,7 @@ class SignIn extends Component {
           <div>
             <Field name="password" type="password" placeholder="password" component={this.renderField} disabled={isSubmittingAuth}/>
           </div>
-          <button action="submit" className="SignIn-Form-SubmitButton" disabled={isSubmittingAuth}>SIGN IN</button>
+          <button action="submit" className="SignIn-Form-SubmitButton" disabled={isSubmittingAuth || invalid}>SIGN IN</button>
           {this.renderAlert()}
           {this.renderSpinner()}
         </form>
@@ -84,14 +84,15 @@ SignIn.propTypes = {
   fields: PropTypes.array,
   handleSubmit: PropTypes.func,
   signInUser: PropTypes.func,
-  isSubmittingAuth: PropTypes.bool
+  isSubmittingAuth: PropTypes.bool,
+  invalid: PropTypes.bool
 }
 
 const validate = ({ password, email }) => {
   const errors = {};
 
-  if (email == null) {
-    errors.email = 'Please enter a valid email';
+  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+    errors.email = 'Email adress is not valid';
   }
   if (password == null || password.length < 4) {
     errors.password = 'Password should be at least 6 characters long';
