@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router'
-import { AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, UNAUTH_USER } from './ActionTypes';
+import { AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, UNAUTH_USER , CURRENT_USER} from './ActionTypes';
 
 export function signInUser({ email, password }) {
   // redux-thunk allows our action creators to return a function instead of an object
@@ -12,9 +12,9 @@ export function signInUser({ email, password }) {
       .then(response => {
         dispatch(submittingForm(false));
         dispatch({ type: AUTH_USER });
-
-        localStorage.setItem('devspace:token', response.data.token);
-
+        const {token, currentUser} = response.data
+        localStorage.setItem('devspace:token', token);
+        localStorage.setItem('devspace:currentUserId', currentUser._id);
         browserHistory.push('/');
       })
       .catch(() => {
@@ -24,9 +24,32 @@ export function signInUser({ email, password }) {
   }
 }
 
+export function getLoggedInUser() {
+  return (dispatch) => {
+    const currentUserId = localStorage.getItem('devspace:currentUserId');
+    const token = localStorage.getItem('devspace:token')
+    if (currentUserId == null || token == null) {
+      dispatch(signOutUser());
+    } else {
+      axios.get(`https://young-springs-34209.herokuapp.com/api/v1/users/${currentUserId}`, {
+        headers: {'Authorization': token}})
+        .then(response => dispatch(currentUser(response.data)))
+        .catch(() => dispatch(signOutUser()));
+    }
+  }
+}
+
 export function signOutUser() {
   localStorage.removeItem('devspace:token');
+  localStorage.removeItem('devspace:currentUserId');
   return { type: UNAUTH_USER };
+}
+
+export function currentUser(user) {
+  return {
+    type: CURRENT_USER,
+    payload: user
+  }
 }
 
 export function authError(err) {

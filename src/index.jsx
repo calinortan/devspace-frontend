@@ -51,7 +51,7 @@ ReactDOM.render((
           <IndexRoute component={UserList} />
           <Route path='/signin' component={SignIn}></Route>
         </Route>
-        <Route path='/:id' component={App} user>
+        <Route path='/:id' component={RequireAuth(App)} user>
           <IndexRoute component={UserList} />
         </Route>
       </Router>

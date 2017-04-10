@@ -1,4 +1,4 @@
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, SUBMITTING_AUTH } from '../actions/ActionTypes'
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, CURRENT_USER } from '../actions/ActionTypes'
 const defaultState = {
   isSubmittingAuth: false
 }
@@ -12,6 +12,8 @@ export default (state = defaultState, action) => {
       return { ...state, error: action.payload };
     case SUBMITTING_AUTH:
       return { ...state, isSubmittingAuth: action.payload };
+    case CURRENT_USER:
+      return { ...state, loggedInUser: action.payload }
   }
   return state;
 }

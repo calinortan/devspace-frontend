@@ -14,6 +14,12 @@ class Header extends Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.user == null) {
+      this.props.getLoggedInUser();
+    }
+  }
+
   renderMessageIcon() {
     if (this.state.hasNewMessages) {
       return <div className='Header-Events-Message'>
@@ -32,8 +38,21 @@ class Header extends Component {
     return <div className='Header-Events-Notifications'></div>;
   }
 
+  renderPrivacyBlock() {
+    const { user, signOutUser } = this.props;
+    if (user == null) return null;
+    return (
+      <div className='Header-Block Header-User'>
+        <UserPrivacyBlock
+          user={user}
+          onSignOut={signOutUser}
+        />
+      </div>
+    );
+  }
+
   render() {
-    const { user, signOutUser } = this.props
+    
     return (
       <div className='Header'>
         <div className='Header-Text Header-Block'>
@@ -44,21 +63,21 @@ class Header extends Component {
           {this.renderMessageIcon()}
           {this.renderNotificationsIcon()}
         </div>
-        <div className='Header-Block Header-User'>
-          <UserPrivacyBlock
-            user={user}
-            onSignOut={signOutUser}
-          />
-        </div>
+        {this.renderPrivacyBlock()}
       </div>
     );
   }
 }
 
+const mapStateToProps = (state) => ({
+  user: state.auth.loggedInUser
+});
+
 Header.propTypes = {
   user: PropTypes.object,
   hasNewMessages: PropTypes.bool,
   hasNotifications: PropTypes.bool,
-  signOutUser: PropTypes.func
+  signOutUser: PropTypes.func,
+  getLoggedInUser: PropTypes.func
 }
-export default connect(null, actions)(Header);
+export default connect(mapStateToProps, actions)(Header);

@@ -10,6 +10,7 @@ class UserPrivacyBlock extends Component {
 
     this.handleTouchTap = this.handleTouchTap.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
     this.state = {
       isOpen: false
     }
@@ -42,34 +43,45 @@ class UserPrivacyBlock extends Component {
       anchorEl: event.currentTarget
     });
   }
+  handleRequestClose() {
+    this.setState({
+      isOpen: false
+    });
+  }
   handleSignOut() {
     this.setState({
       isOpen: false
     });
     this.props.onSignOut();
   }
-  render() {
-    return <div
-      className={'UserPrivacyBlock'}
-      onTouchTap={this.handleTouchTap}
-    >
-      {this.getAvatarBox()}
-      {this.getUserNameText()}
+
+  renderPopover() {
+    return (
       <Popover
         open={this.state.isOpen}
         anchorEl={this.state.anchorEl}
         anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
         targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-        useLayerForClickAway={false}
+        useLayerForClickAway={true}
+        onRequestClose={this.handleRequestClose}
         animation={PopoverAnimationVertical}
       >
         <Menu>
           <MenuItem primaryText="Help &amp; feedback" />
           <MenuItem primaryText="Settings" />
-          <MenuItem primaryText="Sign out" onTouchTap={this.handleSignOut}/>
+          <MenuItem primaryText="Sign out" onTouchTap={this.handleSignOut} />
         </Menu>
       </Popover>
-    </div>;
+    );
+  }
+  render() {
+    return (
+      <div className={'UserPrivacyBlock'} onTouchTap={this.handleTouchTap}>
+        {this.getAvatarBox()}
+        {this.getUserNameText()}
+        {this.renderPopover()}
+      </div>
+    );
   }
 }
 

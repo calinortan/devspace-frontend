@@ -87,12 +87,14 @@ const mapStateToProps = (state) => {
 }
 
 SignIn.propTypes = {
+  authenticated: PropTypes.bool,
   errorMessage: PropTypes.string,
   fields: PropTypes.array,
   handleSubmit: PropTypes.func,
   signInUser: PropTypes.func,
   isSubmittingAuth: PropTypes.bool,
-  invalid: PropTypes.bool
+  invalid: PropTypes.bool,
+  router: PropTypes.object
 }
 
 const validate = ({ password, email }) => {
