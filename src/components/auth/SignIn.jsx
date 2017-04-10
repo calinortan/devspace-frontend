@@ -12,6 +12,12 @@ class SignIn extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
+  componentWillMount() {
+    if (this.props.authenticated) {
+      this.props.router.push('/');
+    }
+  }
+
   handleFormSubmit({ email, password }) {
     this.props.signInUser({ email, password });
   }
@@ -74,6 +80,7 @@ class SignIn extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    authenticated: state.auth.authenticated,
     errorMessage: state.auth.error,
     isSubmittingAuth: state.auth.isSubmittingAuth
   }
