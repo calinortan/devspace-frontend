@@ -8,6 +8,7 @@ import { browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
 import App from './App.jsx';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import logger from 'redux-logger'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import reducers from './reducers/index';
 import reduxThunk from 'redux-thunk';
@@ -17,7 +18,7 @@ import RequireAuth from './components/auth/RequireAuth';
 import SignIn from './components/auth/SignIn.jsx';
 import { AUTH_USER } from './actions/ActionTypes'
 
-const store = createStore(reducers, applyMiddleware(reduxThunk));
+const store = createStore(reducers, applyMiddleware(reduxThunk, logger));
 const theme = getMuiTheme(darkBaseTheme, {
   palette: {
     primary1Color: '#32b38c',
@@ -34,11 +35,11 @@ if (token) {
 
 const UserList = () => {
   return <div>
-    <Link to="/1">1</Link><br />
-    <Link to="/2">2</Link><br />
-    <Link to="/3">3</Link><br />
-    <Link to="/4">4</Link><br />
-    <Link to="/5">5</Link><br />
+    <Link to="/58d7a61f11af570bc83e9d34">Calin Ortan</Link><br />
+    <Link to="/58d7a61f11af570bc83e9d37">Vlad Tamas</Link><br />
+    <Link to="/58d7a61f11af570bc83e9d39">Alexandru Lupse</Link><br />
+    <Link to="/58d6bd1bc35cb81e58422210">CRC</Link><br />
+    <Link to="/58d7a61f11af570bc83e9d35">Rares Teodorescu</Link><br />
   </div>
 }
 
@@ -49,10 +50,9 @@ ReactDOM.render((
         <Route path='/login' component={SignIn}></Route>
         <Route path='/' component={RequireAuth(App)}>
           <IndexRoute component={UserList} />
-          <Route path='/signin' component={SignIn}></Route>
-        </Route>
-        <Route path='/:id' component={RequireAuth(App)} user>
-          <IndexRoute component={UserList} />
+          <Route path='/:user_id'>
+            <IndexRoute component={UserList} />
+          </Route>
         </Route>
       </Router>
     </MuiThemeProvider>

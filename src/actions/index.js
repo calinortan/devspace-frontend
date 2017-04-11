@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router'
-import { AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, UNAUTH_USER , CURRENT_USER} from './ActionTypes';
+import { AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, UNAUTH_USER , CURRENT_USER, VIEW_USER} from './ActionTypes';
 
 export function signInUser({ email, password }) {
   // redux-thunk allows our action creators to return a function instead of an object
@@ -52,6 +52,13 @@ export function currentUser(user) {
   }
 }
 
+export function viewUser(user) {
+  return {
+    type: VIEW_USER,
+    payload: user
+  }
+}
+
 export function authError(err) {
   return {
     type: AUTH_ERROR,
@@ -59,9 +66,29 @@ export function authError(err) {
   }
 }
 
-function submittingForm(bool) {
+function submittingForm(isSubmitting) {
   return {
     type: SUBMITTING_AUTH,
-    payload: bool
+    payload: isSubmitting
+  }
+}
+
+export function getCurrentProfileUser(userId) {
+  return (dispatch) => {
+    const loggedInUserId = localStorage.getItem('devspace:currentUserId');
+    const token = localStorage.getItem('devspace:token');
+    const currentUserId = userId || loggedInUserId;
+    if (currentUserId == null) {
+      dispatch(signOutUser());
+    } else {
+      axios.get(`https://young-springs-34209.herokuapp.com/api/v1/users/${currentUserId}`, {
+        headers: {'Authorization': token}})
+        .then(response => {
+          dispatch(viewUser(response.data))
+        })
+        .catch(() => {
+          dispatch(signOutUser())
+        });
+    }
   }
 }

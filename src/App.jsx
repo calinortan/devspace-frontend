@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './components/header/Header.jsx';
 import {db} from './normalizedDb.js';
-import LeftSidePanel from './components/leftSidePanel/LeftSidePanel.jsx';
+import ProfileSummary from './components/profileSummary/ProfileSummary.jsx';
 import RightSidePanel from './components/rightSidePanel/RightSidePanel.jsx';
 import ContentContainer from './components/contentContainer/ContentContainer.jsx';
 import PropTypes from 'prop-types';
@@ -20,13 +20,11 @@ class App extends Component {
     return (
       <div>
         <Header
-          user={db[this.props.params.id || 0]}
           hasNewMessages={true}
           hasNotifications={true}
         />
         <div className={'App-Content'}>
-          <LeftSidePanel
-            user={db[this.props.params.id || 0]}
+          <ProfileSummary
             isOwnProfile={true}
           />
           <RightSidePanel/>

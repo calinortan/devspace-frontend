@@ -8,6 +8,14 @@ class ProfileCard extends Component {
 
     }
   }
+  static defaultProps = {
+    user: {
+      avatar: '',
+      name: '',
+      workplace: ''
+    }
+  }
+  
 
   getUserAvatar() {
       return <img
