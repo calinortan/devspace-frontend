@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class ProfileCard extends Component {
   constructor(props) {
@@ -15,35 +16,41 @@ class ProfileCard extends Component {
       workplace: ''
     }
   }
-  
+
 
   getUserAvatar() {
-      return <img
-        className={'ProfileCard-Avatar'}
-        src={this.props.user.avatar}
-        alt="user avatar"
-        />;
+    return <img
+      className={'ProfileCard-Avatar'}
+      src={this.props.user.avatar}
+      alt="user avatar"
+    />;
   }
 
-  getCardButtons() {
-      return <div className={'ProfileCard-Actions'}>
-        <button className={'ProfileCard-Actions-Relation Active-Button'}>Connected</button>
-        <button className={'ProfileCard-Actions-Chat Inactive-Button'}>Chat</button>
-      </div>
+  getCardAction() {
+    const { isOwnProfile, isConnection } = this.props
+    if (isOwnProfile) {
+      return <RaisedButton label='Edit Profile' primary={true} />;
+    }
+    if (isConnection) {
+      return <RaisedButton label='Chat' primary={true} />;;
+    }
+    return <RaisedButton label='Connect' primary={true} />;
   }
 
   render() {
     return <div className={'ProfileCard'}>
-        {this.getUserAvatar()}
-        <div className={'ProfileCard-UserName'}>
-            <span className={'ProfileCard-UserName-Text'}>
-              {this.props.user.name}
-            </span>
-        </div>
-        <div className={'ProfileCard-Workplace'}>
-            {this.props.user.workplace}
-        </div>
-        {this.getCardButtons()}
+      {this.getUserAvatar()}
+      <div className={'ProfileCard-UserName'}>
+        <span className={'ProfileCard-UserName-Text'}>
+          {this.props.user.name}
+        </span>
+      </div>
+      <div className={'ProfileCard-Workplace'}>
+        {this.props.user.workplace}
+      </div>
+      <div className={'ProfileCard-Actions'}>
+        {this.getCardAction()}
+      </div>
     </div>
   }
 }

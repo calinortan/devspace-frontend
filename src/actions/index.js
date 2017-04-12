@@ -52,10 +52,11 @@ export function currentUser(user) {
   }
 }
 
-export function viewUser(user) {
+export function viewUser(user, isOwnProfile) {
   return {
     type: VIEW_USER,
-    payload: user
+    payload: user,
+    isOwnProfile
   }
 }
 
@@ -73,7 +74,7 @@ function submittingForm(isSubmitting) {
   }
 }
 
-export function getCurrentProfileUser(userId) {
+export function setCurrentProfileUser(userId) {
   return (dispatch) => {
     const loggedInUserId = localStorage.getItem('devspace:currentUserId');
     const token = localStorage.getItem('devspace:token');
@@ -81,13 +82,14 @@ export function getCurrentProfileUser(userId) {
     if (currentUserId == null) {
       dispatch(signOutUser());
     } else {
+      const isOwnProfile = userId == loggedInUserId;
       axios.get(`https://young-springs-34209.herokuapp.com/api/v1/users/${currentUserId}`, {
         headers: {'Authorization': token}})
         .then(response => {
-          dispatch(viewUser(response.data))
+          dispatch(viewUser(response.data, isOwnProfile));
         })
         .catch(() => {
-          dispatch(signOutUser())
+          dispatch(signOutUser());
         });
     }
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './components/header/Header.jsx';
-import {db} from './normalizedDb.js';
+import { db } from './normalizedDb.js';
 import ProfileSummary from './components/profileSummary/ProfileSummary.jsx';
 import RightSidePanel from './components/rightSidePanel/RightSidePanel.jsx';
 import ContentContainer from './components/contentContainer/ContentContainer.jsx';
@@ -24,10 +24,8 @@ class App extends Component {
           hasNotifications={true}
         />
         <div className={'App-Content'}>
-          <ProfileSummary
-            isOwnProfile={true}
-          />
-          <RightSidePanel/>
+          <ProfileSummary />
+          <RightSidePanel />
           <ContentContainer>
             {this.props.children}
           </ContentContainer>

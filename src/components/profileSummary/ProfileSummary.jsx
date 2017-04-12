@@ -10,28 +10,30 @@ class ProfileSummary extends Component {
     super(props);
   }
   componentDidMount() {
-    const { getCurrentProfileUser, params } = this.props;
-    getCurrentProfileUser(params.user_id);
+    const { setCurrentProfileUser, params } = this.props;
+    setCurrentProfileUser(params.user_id);
   }
 
   componentWillUpdate(nextProps) {
-    const { getCurrentProfileUser, params } = this.props;
+    const { setCurrentProfileUser, params } = this.props;
     const nextUserId = nextProps.params.user_id;
     if (nextUserId !== params.user_id) {
-      getCurrentProfileUser(nextUserId);
+      setCurrentProfileUser(nextUserId);
     }
   }
   render() {
     return <section className={'ProfileSummary'}>
       <ProfileCard
-        user={this.props.user}
+        {...this.props}
       />
     </section>
   }
 }
 
 const mapStateToProps = (state) => ({
-  user: state.profile.user
+  user: state.profile.user,
+  isOwnProfile: state.profile.isOwnProfile,
+  isConnection: state.profile.isConnection
 });
 
 ProfileSummary.propTypes = {
