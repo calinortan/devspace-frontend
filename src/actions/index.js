@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router'
-import { AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, UNAUTH_USER , CURRENT_USER, VIEW_USER} from './ActionTypes';
+import { AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, UNAUTH_USER , CURRENT_USER, VIEW_USER, LOADING_PROFILE} from './ActionTypes';
 
 export function signInUser({ email, password }) {
   // redux-thunk allows our action creators to return a function instead of an object
@@ -83,14 +83,23 @@ export function setCurrentProfileUser(userId) {
       dispatch(signOutUser());
     } else {
       const isOwnProfile = userId == loggedInUserId;
+      dispatch(loadingProfile(true));
       axios.get(`https://young-springs-34209.herokuapp.com/api/v1/users/${currentUserId}`, {
         headers: {'Authorization': token}})
         .then(response => {
           dispatch(viewUser(response.data, isOwnProfile));
+          dispatch(loadingProfile(false));
         })
         .catch(() => {
           dispatch(signOutUser());
         });
     }
+  }
+}
+
+function loadingProfile(isLoading) {
+  return {
+    type: LOADING_PROFILE,
+    payload: isLoading
   }
 }

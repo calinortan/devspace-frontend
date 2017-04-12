@@ -33,7 +33,8 @@ class ProfileSummary extends Component {
 const mapStateToProps = (state) => ({
   user: state.profile.user,
   isOwnProfile: state.profile.isOwnProfile,
-  isConnection: state.profile.isConnection
+  isConnection: state.profile.isConnection,
+  isLoadingProfile: state.profile.isLoadingProfile
 });
 
 ProfileSummary.propTypes = {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
+import ProfileCardPlaceholder from './ProfileCardPlaceholder.jsx';
 
 class ProfileCard extends Component {
   constructor(props) {
@@ -38,6 +39,8 @@ class ProfileCard extends Component {
   }
 
   render() {
+    console.log(this.props.isLoadingProfile)
+    if (this.props.isLoadingProfile) return <ProfileCardPlaceholder />;
     return <div className={'ProfileCard'}>
       {this.getUserAvatar()}
       <div className={'ProfileCard-UserName'}>
@@ -56,6 +59,7 @@ class ProfileCard extends Component {
 }
 
 ProfileCard.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  isProfileLoading: PropTypes.bool
 }
 export default ProfileCard;
