@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import NotificationAlert from './components/NotificationAlert.jsx'
 import UserPrivacyBlock from './components/UserPrivacyBlock.jsx'
+import NotificationsBlock from './components/NotificationsBlock.jsx'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
@@ -29,15 +29,6 @@ class Header extends Component {
     return <div className='Header-Events-Message'></div>;
   }
 
-  renderNotificationsIcon() {
-    if (this.state.hasNotifications) {
-      return <div className='Header-Events-Notifications'>
-        <NotificationAlert notificationsNumber={3}></NotificationAlert>
-      </div>;
-    }
-    return <div className='Header-Events-Notifications'></div>;
-  }
-
   renderPrivacyBlock() {
     const { user, signOutUser } = this.props;
     if (user == null) return null;
@@ -51,18 +42,22 @@ class Header extends Component {
     );
   }
 
+  renderNotificationsBlock() {
+    return (
+      <div className='Header-Block Header-Events'>
+        < NotificationsBlock />
+      </div>
+    );
+  }
+
   render() {
-    
+
     return (
       <div className='Header'>
         <div className='Header-Text Header-Block'>
           Devspace
         </div>
-        <div className='Header-Block Header-Events'>
-          <div className='Header-Events-AddFriends'></div>
-          {this.renderMessageIcon()}
-          {this.renderNotificationsIcon()}
-        </div>
+        {this.renderNotificationsBlock()}
         {this.renderPrivacyBlock()}
       </div>
     );
