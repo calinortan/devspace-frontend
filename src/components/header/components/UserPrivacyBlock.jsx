@@ -62,7 +62,7 @@ class UserPrivacyBlock extends Component {
         anchorEl={this.state.anchorEl}
         anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
         targetOrigin={{ horizontal: 'left', vertical: 'top' }}
-        useLayerForClickAway={true}
+        useLayerForClickAway={false}
         onRequestClose={this.handleRequestClose}
         animation={PopoverAnimationVertical}
       >

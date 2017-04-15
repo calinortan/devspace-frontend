@@ -20,15 +20,6 @@ class Header extends Component {
     }
   }
 
-  renderMessageIcon() {
-    if (this.state.hasNewMessages) {
-      return <div className='Header-Events-Message'>
-        <NotificationAlert notificationsNumber={2}></NotificationAlert>
-      </div>;
-    }
-    return <div className='Header-Events-Message'></div>;
-  }
-
   renderPrivacyBlock() {
     const { user, signOutUser } = this.props;
     if (user == null) return null;
