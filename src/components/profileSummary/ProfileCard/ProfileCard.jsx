@@ -33,7 +33,7 @@ class ProfileCard extends Component {
       return <RaisedButton label='Edit Profile' primary={true} />;
     }
     if (isConnection) {
-      return <RaisedButton label='Chat' primary={true} />;;
+      return <RaisedButton label='Chat' primary={true} />;
     }
     return <RaisedButton label='Connect' primary={true} />;
   }

@@ -82,7 +82,7 @@ export function setCurrentProfileUser(userId) {
     if (currentUserId == null) {
       dispatch(signOutUser());
     } else {
-      const isOwnProfile = userId == loggedInUserId;
+      const isOwnProfile = (userId == null) || (userId == loggedInUserId);
       dispatch(loadingProfile(true));
       axios.get(`https://young-springs-34209.herokuapp.com/api/v1/users/${currentUserId}`, {
         headers: {'Authorization': token}})
