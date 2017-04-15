@@ -39,7 +39,6 @@ class ProfileCard extends Component {
   }
 
   render() {
-    console.log(this.props.isLoadingProfile)
     if (this.props.isLoadingProfile) return <ProfileCardPlaceholder />;
     return <div className={'ProfileCard'}>
       {this.getUserAvatar()}
@@ -60,6 +59,8 @@ class ProfileCard extends Component {
 
 ProfileCard.propTypes = {
   user: PropTypes.object,
-  isProfileLoading: PropTypes.bool
+  isLoadingProfile: PropTypes.bool,
+  isOwnProfile:PropTypes.bool,
+  isConnection:PropTypes.bool
 }
 export default ProfileCard;
