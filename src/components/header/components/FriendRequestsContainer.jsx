@@ -27,7 +27,7 @@ class FriendRequestsContainer extends Component {
           <div className='FriendRequestsContainer-List-Item-Name'>
             <Link to={`/${friendRequest.from._id}`}>{friendRequest.from.name}</Link>
           </div>
-            {this.getRequestActions(friendRequest)}
+          {this.getRequestActions(friendRequest)}
         </li>
       );
     })
@@ -37,7 +37,12 @@ class FriendRequestsContainer extends Component {
     if (friendReq.status === 'pending') {
       return (
         <div>
-          <RaisedButton label='Connect' primary={true} style={{ marginRight: '15px' }} />
+          <RaisedButton
+            label='Connect'
+            primary={true}
+            style={{ marginRight: '15px' }}
+            onTouchTap={() => this.props.acceptFriendRequest(friendReq._id)}
+          />
           <RaisedButton label='Reject' secondary={true} />
         </div>
       );
@@ -64,6 +69,7 @@ class FriendRequestsContainer extends Component {
 }
 FriendRequestsContainer.propTypes = {
   friendRequests: PropTypes.array,
-  getFriendRequests: PropTypes.func
+  getFriendRequests: PropTypes.func,
+  acceptFriendRequest: PropTypes.func
 }
 export default FriendRequestsContainer;

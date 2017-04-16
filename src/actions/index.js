@@ -4,7 +4,7 @@ import _ from 'lodash';
 import {
   AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, GET_FRIEND_REQUESTS, FRIEND_REQUEST_SENT,
   UNAUTH_USER, CURRENT_USER, VIEW_USER, LOADING_PROFILE, LOADING_NOTIFIACTIONS,
-  SET_PENDING_REQUEST
+  SET_PENDING_REQUEST, ACCEPT_FRIEND_REQUEST
 } from './ActionTypes';
 
 export function signInUser({ email, password }) {
@@ -181,7 +181,7 @@ export function sendFriendRequest(userId) {
       }).then(response => {
         dispatch(friendRequestSent(response.data));
       }).catch((err) => {
-        throw (err)
+        throw (err);
       });
     }
   }
@@ -190,6 +190,34 @@ export function sendFriendRequest(userId) {
 function friendRequestSent(friendRequest) {
   return {
     type: FRIEND_REQUEST_SENT,
+    payload: friendRequest
+  }
+}
+
+export function acceptFriendRequest(friendRequestId) {
+  return (dispatch) => {
+    const loggedInUserId = localStorage.getItem('devspace:currentUserId');
+    const token = localStorage.getItem('devspace:token');
+    if (loggedInUserId == null) {
+      dispatch(signOutUser());
+    } else {
+      axios({
+        method: 'PUT',
+        headers: { 'Authorization': token },
+        url: `https://young-springs-34209.herokuapp.com/api/v1/friend-requests/${friendRequestId}`,
+        data: { status: 'accepted' }
+      }).then(response => {
+        dispatch(friendRequestAccepted(response.data.friendReq));
+      }).catch((err) => {
+        throw (err);
+      });
+    }
+  }
+}
+
+function friendRequestAccepted(friendRequest) {
+  return {
+    type: ACCEPT_FRIEND_REQUEST,
     payload: friendRequest
   }
 }

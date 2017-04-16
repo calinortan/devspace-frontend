@@ -34,13 +34,14 @@ class Header extends Component {
   }
 
   renderNotificationsBlock() {
-    const { friendRequests, getFriendRequests, loadingNotifications} = this.props;
+    const { friendRequests, getFriendRequests, loadingNotifications, acceptFriendRequest } = this.props;
     return (
       <div className='Header-Block Header-Events'>
         < NotificationsBlock
           friendRequests={friendRequests}
           getFriendRequests={getFriendRequests}
           loadingNotifications={loadingNotifications}
+          acceptFriendRequest={acceptFriendRequest}
         />
       </div>
     );
@@ -74,6 +75,7 @@ Header.propTypes = {
   getLoggedInUser: PropTypes.func,
   getFriendRequests: PropTypes.func,
   friendRequests: PropTypes.array,
-  loadingNotifications: PropTypes.bool
+  loadingNotifications: PropTypes.bool,
+  acceptFriendRequest: PropTypes.func
 }
 export default connect(mapStateToProps, actions)(Header);
