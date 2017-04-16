@@ -7,7 +7,7 @@ export default (state = defaultState, action) => {
     case AUTH_USER:
       return { ...state, authenticated: true };
     case UNAUTH_USER:
-      return { ...state, authenticated: false };
+      return { ...state, authenticated: false, loggedInUser: null };
     case AUTH_ERROR:
       return { ...state, error: action.payload };
     case SUBMITTING_AUTH:

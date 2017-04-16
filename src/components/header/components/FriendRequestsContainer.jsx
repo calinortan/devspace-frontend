@@ -25,15 +25,32 @@ class FriendRequestsContainer extends Component {
           <div className='FriendRequestsContainer-List-Item-Name'>
             <Link to={`/${friendRequest.from._id}`}>{friendRequest.from.name}</Link>
           </div>
-          <RaisedButton label='Connect' primary={true} style={{ marginRight: '15px' }} />
-          <RaisedButton label='Ignore' secondary={true} />
+            {this.getRequestActions(friendRequest)}
         </li>
       );
     })
   }
 
+  getRequestActions(friendReq) {
+    if (friendReq.status === 'pending') {
+      return (
+        <div>
+          <RaisedButton label='Connect' primary={true} style={{ marginRight: '15px' }} />
+          <RaisedButton label='Reject' secondary={true} />
+        </div>
+      );
+    }
+    if (friendReq.status === 'accepted') {
+      return (
+        <div>
+          <RaisedButton label='Chat' secondary={true} style={{ marginRight: '15px' }} />
+          <RaisedButton label='Accepted' secondary={true} />
+        </div>
+      );
+    }
+  }
+
   render() {
-    console.log(this.props)
     return (
       <div className='FriendRequestsContainer'>
         <ul className='FriendRequestsContainer-List'>

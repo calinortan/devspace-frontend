@@ -6,9 +6,8 @@ import ProfileCardPlaceholder from './ProfileCardPlaceholder.jsx';
 class ProfileCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
 
-    }
+    this.handleSendRequest = this.handleSendRequest.bind(this);
   }
   static defaultProps = {
     user: {
@@ -16,6 +15,10 @@ class ProfileCard extends Component {
       name: '',
       workplace: ''
     }
+  }
+
+  handleSendRequest() {
+    this.props.sendFriendRequest(this.props.user._id);
   }
 
 
@@ -35,7 +38,7 @@ class ProfileCard extends Component {
     if (isConnection) {
       return <RaisedButton label='Chat' primary={true} />;
     }
-    return <RaisedButton label='Connect' primary={true} />;
+    return <RaisedButton label='Connect' primary={true} onTouchTap={this.handleSendRequest} />;
   }
 
   render() {
@@ -60,7 +63,8 @@ class ProfileCard extends Component {
 ProfileCard.propTypes = {
   user: PropTypes.object,
   isLoadingProfile: PropTypes.bool,
-  isOwnProfile:PropTypes.bool,
-  isConnection:PropTypes.bool
+  isOwnProfile: PropTypes.bool,
+  isConnection: PropTypes.bool,
+  sendFriendRequest: PropTypes.func
 }
 export default ProfileCard;
