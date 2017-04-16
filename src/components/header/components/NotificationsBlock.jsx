@@ -5,6 +5,8 @@ import CommunicationMessage from 'material-ui/svg-icons/communication/message';
 import Popover, { PopoverAnimationVertical } from 'material-ui/Popover';
 import SocialNotifications from 'material-ui/svg-icons/social/notifications';
 import SocialPeople from 'material-ui/svg-icons/social/people';
+import FriendRequestsContainer from './FriendRequestsContainer.jsx';
+import CircularProgress from 'material-ui/CircularProgress';
 
 class NotificationsBlock extends Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class NotificationsBlock extends Component {
     this.showSocialNotifications = this.showSocialNotifications.bind(this);
 
     this.state = {
-      isOpen: true,
+      isOpen: false,
       popoverContent: null
     }
   }
@@ -25,7 +27,6 @@ class NotificationsBlock extends Component {
       <button
         className='NotificationsBlock-Button'
         onTouchTap={this.showFriendsNotifications}
-        onBlur={this.handleRequestClose}
       >
         <Badge
           badgeContent={4}
@@ -42,7 +43,6 @@ class NotificationsBlock extends Component {
       <button
         className='NotificationsBlock-Button'
         onTouchTap={this.showMessagesNotifications}
-        onBlur={this.handleRequestClose}
       >
         <Badge
           badgeContent={'C'}
@@ -58,7 +58,6 @@ class NotificationsBlock extends Component {
       <button
         className='NotificationsBlock-Button'
         onTouchTap={this.showSocialNotifications}
-        onBlur={this.handleRequestClose}
       >
         <Badge
           badgeContent={2}
@@ -110,7 +109,9 @@ class NotificationsBlock extends Component {
         targetOrigin={{ horizontal: 'left', vertical: 'top' }}
         useLayerForClickAway={false}
         animation={PopoverAnimationVertical}
-      >
+        canAutoPosition={true}
+        style={{backgroundColor: '#393836'}}
+      > 
         {this.getPopoverContent()}
       </Popover>
     );
@@ -118,9 +119,12 @@ class NotificationsBlock extends Component {
   // onRequestClose={this.handleRequestClose}
 
   getPopoverContent() {
+    if (this.props.loadingNotifications) {
+      return <CircularProgress/>;
+    }
     switch (this.state.popoverContent) {
       case 'FRIENDS_NOTIFICATIONS':
-        return <div>FRIENDS NOTIFICATIONS</div>;
+        return <FriendRequestsContainer {...this.props}/>;
       case 'MESSAGES_NOTIFICATIONS':
         return <div>MESSAGES NOTIFICATIONS</div>;
       case 'SOCIAL_NOTIFICATIONS':
@@ -131,7 +135,7 @@ class NotificationsBlock extends Component {
   }
   render() {
     return (
-      <div className='NotificationsBlock' ref={(el) => { this.element = el; }}>
+      <div className='NotificationsBlock' ref={(el) => { this.element = el; }} >
         {this.renderFriendsNotification()}
         {this.renderMessagesNotification()}
         {this.renderSocialNotification()}
@@ -139,6 +143,10 @@ class NotificationsBlock extends Component {
       </div>
     );
   }
+}
+
+NotificationsBlock.propTypes = {
+  loadingNotifications: PropTypes.bool
 }
 
 export default NotificationsBlock;

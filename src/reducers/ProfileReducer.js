@@ -8,8 +8,12 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case VIEW_USER:
-      const isConnection = _.includes(state.loggedInUserConnections, action.payload._id);
-      return { ...state, user: action.payload, isOwnProfile: action.isOwnProfile, isConnection };
+      return {
+        ...state,
+        user: action.payload,
+        isOwnProfile: action.isOwnProfile,
+        isConnection: _.includes(state.loggedInUserConnections, action.payload._id)
+      };
     case CURRENT_USER:
       return {...state, loggedInUserConnections: action.payload.connections};
     case LOADING_PROFILE:

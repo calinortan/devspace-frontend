@@ -22,7 +22,9 @@ const store = createStore(reducers, applyMiddleware(reduxThunk, logger));
 const theme = getMuiTheme(darkBaseTheme, {
   palette: {
     primary1Color: '#32b38c',
-    primary2Color: '#32b38c'
+    primary2Color: '#32b38c',
+    accent1Color: 'gray',
+    accent2Color: 'gray'
   }
 });
 
