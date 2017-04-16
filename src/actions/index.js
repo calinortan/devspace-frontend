@@ -18,6 +18,7 @@ export function signInUser({ email, password }) {
         dispatch(submittingForm(false));
         dispatch({ type: AUTH_USER });
         const { token, currentUser } = response.data
+        dispatch(setCurrentUser(currentUser));
         localStorage.setItem('devspace:token', token);
         localStorage.setItem('devspace:currentUserId', currentUser._id);
         browserHistory.push('/');
@@ -39,7 +40,7 @@ export function getLoggedInUser() {
       axios.get(`https://young-springs-34209.herokuapp.com/api/v1/users/${currentUserId}`, {
         headers: { 'Authorization': token }
       })
-        .then(response => dispatch(currentUser(response.data)))
+        .then(response => dispatch(setCurrentUser(response.data)))
         .catch(() => dispatch(signOutUser()));
     }
   }
@@ -51,7 +52,7 @@ export function signOutUser() {
   return { type: UNAUTH_USER };
 }
 
-export function currentUser(user) {
+export function setCurrentUser(user) {
   return {
     type: CURRENT_USER,
     payload: user

@@ -16,7 +16,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import RequireAuth from './components/auth/RequireAuth';
 import SignIn from './components/auth/SignIn.jsx';
-import { AUTH_USER } from './actions/ActionTypes'
+import { AUTH_USER } from './actions/ActionTypes';
 
 const store = createStore(reducers, applyMiddleware(reduxThunk, logger));
 const theme = getMuiTheme(darkBaseTheme, {

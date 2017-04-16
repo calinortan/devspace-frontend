@@ -1,4 +1,4 @@
-import { GET_FRIEND_REQUESTS, LOADING_NOTIFIACTIONS } from '../actions/ActionTypes'
+import { GET_FRIEND_REQUESTS, LOADING_NOTIFIACTIONS, UNAUTH_USER } from '../actions/ActionTypes'
 const defaultState = {
   loadingNotifications: false
 }
@@ -8,6 +8,8 @@ export default (state = defaultState, action) => {
       return { ...state, friendRequests: action.payload };
     case LOADING_NOTIFIACTIONS:
       return { ...state, loadingNotifications: action.payload };
+    case UNAUTH_USER:
+      return { ...state, friendRequests: null }
   }
   return state;
 }
