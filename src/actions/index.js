@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router'
+import _ from 'lodash';
 import {
   AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, GET_FRIEND_REQUESTS, FRIEND_REQUEST_SENT,
-  UNAUTH_USER, CURRENT_USER, VIEW_USER, LOADING_PROFILE, LOADING_NOTIFIACTIONS
+  UNAUTH_USER, CURRENT_USER, VIEW_USER, LOADING_PROFILE, LOADING_NOTIFIACTIONS,
+  SET_PENDING_REQUEST
 } from './ActionTypes';
 
 export function signInUser({ email, password }) {
@@ -88,17 +90,36 @@ export function setCurrentProfileUser(userId) {
     } else {
       const isOwnProfile = (userId == null) || (userId == loggedInUserId);
       dispatch(loadingProfile(true));
-      axios.get(`https://young-springs-34209.herokuapp.com/api/v1/users/${currentUserId}`, {
-        headers: { 'Authorization': token }
-      })
-        .then(response => {
-          dispatch(viewUser(response.data, isOwnProfile));
-          dispatch(loadingProfile(false));
+      axios.all([
+        axios.get('https://young-springs-34209.herokuapp.com/api/v1/friend-requests', {
+          headers: { 'Authorization': token },
+          params: {
+            users_id_in: _.trimEnd([loggedInUserId, userId].toString(), ',')
+          }
+        }),
+        axios.get(`https://young-springs-34209.herokuapp.com/api/v1/users/${currentUserId}`, {
+          headers: { 'Authorization': token }
         })
+      ])
+        .then(axios.spread((friendRequestResponse, userResponse) => {
+          const pendingFriendRequests = friendRequestResponse.data.friendRequests;
+          _.isEmpty(pendingFriendRequests) ?
+            dispatch(setPendingFriendRequest(null)) : dispatch(setPendingFriendRequest(pendingFriendRequests[0]));
+
+          dispatch(viewUser(userResponse.data, isOwnProfile));
+          dispatch(loadingProfile(false));
+        }))
         .catch(() => {
           dispatch(signOutUser());
         });
     }
+  }
+}
+
+function setPendingFriendRequest(friendRequest) {
+  return {
+    type: SET_PENDING_REQUEST,
+    payload: friendRequest
   }
 }
 
@@ -157,7 +178,6 @@ export function sendFriendRequest(userId) {
           to: userId
         }
       }).then(response => {
-        console.log(response);
         dispatch(friendRequestSent(response.data));
       }).catch((err) => {
         throw (err)

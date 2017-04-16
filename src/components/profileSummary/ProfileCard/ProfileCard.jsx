@@ -30,13 +30,25 @@ class ProfileCard extends Component {
     />;
   }
 
+  getPendingRequestAction(pendingRequest) {
+    const isUserSender = pendingRequest.from._id == this.props.user._id;
+    if (isUserSender) {
+      return <RaisedButton label='Accept' primary={true} />;
+    }
+    return <RaisedButton label='Request Sent' secondary={true} />;
+  }
+
   getCardAction() {
-    const { isOwnProfile, isConnection } = this.props
+    const { isOwnProfile, isConnection, pendingRequest} = this.props;
+
     if (isOwnProfile) {
-      return <RaisedButton label='Edit Profile' primary={true} />;
+      return <RaisedButton label='Edit Profile' secondary={true} />;
     }
     if (isConnection) {
       return <RaisedButton label='Chat' primary={true} />;
+    }
+    if (pendingRequest != null && pendingRequest.status === 'pending') {
+      return this.getPendingRequestAction(pendingRequest);
     }
     return <RaisedButton label='Connect' primary={true} onTouchTap={this.handleSendRequest} />;
   }
@@ -65,6 +77,7 @@ ProfileCard.propTypes = {
   isLoadingProfile: PropTypes.bool,
   isOwnProfile: PropTypes.bool,
   isConnection: PropTypes.bool,
-  sendFriendRequest: PropTypes.func
+  sendFriendRequest: PropTypes.func,
+  pendingRequest: PropTypes.object
 }
 export default ProfileCard;

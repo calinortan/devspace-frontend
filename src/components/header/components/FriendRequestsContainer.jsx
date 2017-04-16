@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Avatar from 'material-ui/Avatar';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router'
+import _ from 'lodash';
 
 
 class FriendRequestsContainer extends Component {
@@ -17,6 +18,7 @@ class FriendRequestsContainer extends Component {
   renderFriendRequests() {
     const { friendRequests } = this.props;
     if (friendRequests == null) return null;
+    if (_.isEmpty(friendRequests)) return <div>No friend requests !</div>;
 
     return friendRequests.map((friendRequest) => {
       return (

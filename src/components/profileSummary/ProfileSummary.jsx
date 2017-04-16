@@ -34,11 +34,12 @@ const mapStateToProps = (state) => ({
   user: state.profile.user,
   isOwnProfile: state.profile.isOwnProfile,
   isConnection: state.profile.isConnection,
-  isLoadingProfile: state.profile.isLoadingProfile
+  isLoadingProfile: state.profile.isLoadingProfile,
+  pendingRequest: state.profile.pendingRequest
 });
 
 ProfileSummary.propTypes = {
-  user: PropTypes.object,
-  isOwnProfile: PropTypes.bool
+  params: PropTypes.object,
+  setCurrentProfileUser: PropTypes.func
 }
 export default withRouter(connect(mapStateToProps, actions)(ProfileSummary));

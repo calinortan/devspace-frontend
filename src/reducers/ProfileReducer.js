@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { VIEW_USER, CURRENT_USER, LOADING_PROFILE } from '../actions/ActionTypes'
+import { VIEW_USER, CURRENT_USER, LOADING_PROFILE, SET_PENDING_REQUEST } from '../actions/ActionTypes'
 
 const defaultState = {
 
@@ -18,6 +18,8 @@ export default (state = defaultState, action) => {
       return {...state, loggedInUserConnections: action.payload.connections};
     case LOADING_PROFILE:
       return {...state, isLoadingProfile: action.payload};
+    case SET_PENDING_REQUEST:
+      return {...state, pendingRequest: action.payload};
   }
   return state;
 }
