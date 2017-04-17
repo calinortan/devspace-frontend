@@ -1,10 +1,11 @@
 import {
-  GET_FRIEND_REQUESTS, LOADING_NOTIFIACTIONS,
+  GET_FRIEND_REQUESTS, LOADING_NOTIFIACTIONS, FRIEND_REQUEST_NOTIF,
   UNAUTH_USER, ACCEPT_FRIEND_REQUEST
 } from '../actions/ActionTypes';
 import _ from 'lodash';
 const defaultState = {
-  loadingNotifications: false
+  loadingNotifications: false,
+  newPendingRequests: 0
 }
 export default (state = defaultState, action) => {
   switch (action.type) {
@@ -21,7 +22,9 @@ export default (state = defaultState, action) => {
           return req._id == action.payload._id ?
             _.assign({}, req, { status: action.payload.status }) : req;
         })
-      }
+      };
+    case FRIEND_REQUEST_NOTIF:
+      return { ...state, newPendingRequests: action.payload }
   }
   return state;
 }

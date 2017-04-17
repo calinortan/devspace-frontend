@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router'
 import _ from 'lodash';
+import firebaseDb from '../firebase';
 import {
   AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, GET_FRIEND_REQUESTS, FRIEND_REQUEST_SENT,
   UNAUTH_USER, CURRENT_USER, VIEW_USER, LOADING_PROFILE, LOADING_NOTIFIACTIONS,
-  SET_PENDING_REQUEST, ACCEPT_FRIEND_REQUEST
+  SET_PENDING_REQUEST, ACCEPT_FRIEND_REQUEST, FRIEND_REQUEST_NOTIF
 } from './ActionTypes';
 
 export function signInUser({ email, password }) {
@@ -22,6 +23,9 @@ export function signInUser({ email, password }) {
         localStorage.setItem('devspace:token', token);
         localStorage.setItem('devspace:currentUserId', currentUser._id);
         browserHistory.push('/');
+        return firebaseDb.ref(`/friend-requests/${currentUser._id}`).on('value', (snapshot) => {
+          dispatch({ type: FRIEND_REQUEST_NOTIF, payload: snapshot.val() });
+        });
       })
       .catch(() => {
         dispatch(submittingForm(false));
@@ -40,8 +44,12 @@ export function getLoggedInUser() {
       axios.get(`https://young-springs-34209.herokuapp.com/api/v1/users/${currentUserId}`, {
         headers: { 'Authorization': token }
       })
-        .then(response => dispatch(setCurrentUser(response.data)))
-        .catch(() => dispatch(signOutUser()));
+        .then(response => {
+          dispatch(setCurrentUser(response.data));
+          return firebaseDb.ref(`/friend-requests/${currentUserId}`).on('value', (snapshot) => {
+            dispatch({ type: FRIEND_REQUEST_NOTIF, payload: snapshot.val() });
+          });
+        }).catch(() => dispatch(signOutUser()));
     }
   }
 }

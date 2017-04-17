@@ -34,7 +34,9 @@ class Header extends Component {
   }
 
   renderNotificationsBlock() {
-    const { friendRequests, getFriendRequests, loadingNotifications, acceptFriendRequest } = this.props;
+    const {
+      friendRequests, getFriendRequests, loadingNotifications,
+      acceptFriendRequest, newPendingRequests } = this.props;
     return (
       <div className='Header-Block Header-Events'>
         < NotificationsBlock
@@ -42,6 +44,7 @@ class Header extends Component {
           getFriendRequests={getFriendRequests}
           loadingNotifications={loadingNotifications}
           acceptFriendRequest={acceptFriendRequest}
+          newPendingRequests={newPendingRequests}
         />
       </div>
     );
@@ -64,7 +67,8 @@ class Header extends Component {
 const mapStateToProps = (state) => ({
   user: state.auth.loggedInUser,
   friendRequests: state.notifications.friendRequests,
-  loadingNotifications: state.notifications.loadingNotifications
+  loadingNotifications: state.notifications.loadingNotifications,
+  newPendingRequests: state.notifications.newPendingRequests
 });
 
 Header.propTypes = {
@@ -76,6 +80,7 @@ Header.propTypes = {
   getFriendRequests: PropTypes.func,
   friendRequests: PropTypes.array,
   loadingNotifications: PropTypes.bool,
-  acceptFriendRequest: PropTypes.func
+  acceptFriendRequest: PropTypes.func,
+  newPendingRequests: PropTypes.number
 }
 export default connect(mapStateToProps, actions)(Header);

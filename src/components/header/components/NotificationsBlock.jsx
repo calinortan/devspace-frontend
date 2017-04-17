@@ -7,6 +7,7 @@ import SocialNotifications from 'material-ui/svg-icons/social/notifications';
 import SocialPeople from 'material-ui/svg-icons/social/people';
 import FriendRequestsContainer from './FriendRequestsContainer.jsx';
 import CircularProgress from 'material-ui/CircularProgress';
+import _ from 'lodash';
 
 class NotificationsBlock extends Component {
   constructor(props) {
@@ -22,16 +23,22 @@ class NotificationsBlock extends Component {
       popoverContent: null
     }
   }
+
+  getNotifDefaultStyle() {
+    return {
+      top: 8,
+      right: 12,
+      backgroundColor: 'coral'
+    };
+  }
   renderFriendsNotification() {
+    const { newPendingRequests } = this.props;
+    const hasNotifs = _.isNumber(newPendingRequests) && newPendingRequests > 0;
+    const notifStyle = hasNotifs ?
+      this.getNotifDefaultStyle() : _.assign(this.getNotifDefaultStyle(), { display: 'none' });
     return (
-      <button
-        className='NotificationsBlock-Button'
-        onTouchTap={this.showFriendsNotifications}
-      >
-        <Badge
-          badgeContent={4}
-          badgeStyle={{ top: 8, right: 12, backgroundColor: 'coral' }}
-        >
+      <button className='NotificationsBlock-Button' onTouchTap={this.showFriendsNotifications}>
+        <Badge badgeContent={this.props.newPendingRequests} badgeStyle={notifStyle}>
           <SocialPeople />
         </Badge>
       </button>
@@ -110,21 +117,20 @@ class NotificationsBlock extends Component {
         useLayerForClickAway={false}
         animation={PopoverAnimationVertical}
         canAutoPosition={true}
-        style={{backgroundColor: '#393836'}}
-      > 
+        style={{ backgroundColor: '#393836' }}
+      >
         {this.getPopoverContent()}
       </Popover>
     );
   }
-  // onRequestClose={this.handleRequestClose}
 
   getPopoverContent() {
     if (this.props.loadingNotifications) {
-      return <CircularProgress/>;
+      return <CircularProgress />;
     }
     switch (this.state.popoverContent) {
       case 'FRIENDS_NOTIFICATIONS':
-        return <FriendRequestsContainer {...this.props}/>;
+        return <FriendRequestsContainer {...this.props} />;
       case 'MESSAGES_NOTIFICATIONS':
         return <div>MESSAGES NOTIFICATIONS</div>;
       case 'SOCIAL_NOTIFICATIONS':
@@ -146,7 +152,8 @@ class NotificationsBlock extends Component {
 }
 
 NotificationsBlock.propTypes = {
-  loadingNotifications: PropTypes.bool
+  loadingNotifications: PropTypes.bool,
+  newPendingRequests: PropTypes.number
 }
 
 export default NotificationsBlock;
