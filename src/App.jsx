@@ -18,17 +18,17 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div className='App-Container'>
         <Header
           hasNewMessages={true}
           hasNotifications={true}
         />
         <div className={'App-Content'}>
           <ProfileSummary />
-          <RightSidePanel />
           <ContentContainer>
             {this.props.children}
           </ContentContainer>
+          <RightSidePanel />
         </div>
       </div>
     );

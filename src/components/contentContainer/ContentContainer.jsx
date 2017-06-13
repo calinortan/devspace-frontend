@@ -8,6 +8,7 @@ class ContentContainer extends Component {
   render() {
     return <section className={'ContentContainer'}>
       {this.props.children}
+      <div className="longContentTest"> test</div>
     </section>
   }
 }

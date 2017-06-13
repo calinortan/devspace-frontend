@@ -1,5 +1,6 @@
 .ContentContainer {
-    margin-left: 300px;
+    flex-grow: 1;
+    overflow: auto;
     .longContentTest {
         height: 2000px;
     }
