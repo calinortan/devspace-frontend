@@ -9,8 +9,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasNewMessages: props.hasNewMessages,
-      hasNotifications: props.hasNotifications
+
     }
   }
 
@@ -73,8 +72,6 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   user: PropTypes.object,
-  hasNewMessages: PropTypes.bool,
-  hasNotifications: PropTypes.bool,
   signOutUser: PropTypes.func,
   getLoggedInUser: PropTypes.func,
   getFriendRequests: PropTypes.func,

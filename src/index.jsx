@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { browserHistory, Router, Route, IndexRoute, Link } from 'react-router'
 import App from './App.jsx';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import WallContent from './components/wallContent/WallContent.jsx';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import logger from 'redux-logger'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -53,7 +54,7 @@ ReactDOM.render((
         <Route path='/' component={RequireAuth(App)}>
           <IndexRoute component={UserList} />
           <Route path='/:user_id'>
-            <IndexRoute component={UserList} />
+            <IndexRoute component={WallContent} />
           </Route>
         </Route>
       </Router>

@@ -1,9 +1,7 @@
 .ContentContainer {
     flex-grow: 1;
     overflow: auto;
-    .longContentTest {
-        height: 2000px;
-    }
+    background: #393836;
     @media only screen and (max-width: 768px) {
         margin-left: 0;
     }
