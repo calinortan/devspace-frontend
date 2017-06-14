@@ -17,7 +17,7 @@ class DocumentItem extends Component {
       <CardHeader
         title={document.user.name}
         subtitle={document.user.workplace}
-        avatar={document.user.image}
+        avatar={document.user.avatar}
       />
       <CardMedia>
         <img src={document.image} alt="" />
