@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import DocumentsList from './documentsList/DocumentsList.jsx';
+import AddCommentDialog from './AddCommentDialog.jsx';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { withRouter } from 'react-router';
@@ -32,6 +33,7 @@ class WallContent extends Component {
   }
   render() {
     return <div className={'WallContent'}>
+      <AddCommentDialog />
       <DocumentsList {...this.props} />
     </div>
   }

@@ -4,6 +4,7 @@ import NotificationsBlock from './components/NotificationsBlock.jsx'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import { Link } from 'react-router'
 
 class Header extends Component {
   constructor(props) {
@@ -53,9 +54,12 @@ class Header extends Component {
 
     return (
       <div className='Header'>
-        <div className='Header-Text Header-Block'>
-          Devspace
-        </div>
+        <Link to="/">
+          <div className='Header-Text Header-Block'>
+            Devspace
+          </div>
+        </Link>
+
         {this.renderNotificationsBlock()}
         {this.renderPrivacyBlock()}
       </div>
