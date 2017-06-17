@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
+import UserInterests from './UserInterests.jsx';
+import TechList from './TechList.jsx';
 import ProfileCardPlaceholder from './ProfileCardPlaceholder.jsx';
+import {Tabs, Tab} from 'material-ui/Tabs';
+import InterestsIcon from 'material-ui/svg-icons/action/loyalty';
+import CodeIcon from 'material-ui/svg-icons/action/code';
+import { Link } from 'react-router'
 
 class ProfileCard extends Component {
   constructor(props) {
@@ -13,7 +19,9 @@ class ProfileCard extends Component {
     user: {
       avatar: '',
       name: '',
-      workplace: ''
+      workplace: '',
+      interests: [],
+      programmingLanguages: []
     }
   }
 
@@ -30,6 +38,15 @@ class ProfileCard extends Component {
     />;
   }
 
+  renderUserInterests() {
+    const { interests } = this.props.user;
+    return <UserInterests interests={interests}/>
+  }
+
+  renderProgrammingLanguages() {
+    const { programmingLanguages } = this.props.user;
+    return <TechList items={programmingLanguages}/>
+  }
   getPendingRequestAction(pendingRequest) {
     const isUserSender = pendingRequest.from._id == this.props.user._id;
     if (isUserSender) {
@@ -62,12 +79,35 @@ class ProfileCard extends Component {
           {this.props.user.name}
         </span>
       </div>
+      <div className='ProfileCard-Favorites'>
+        <Link to={`/${this.props.user._id}/stats`}>
+          See some stats about his connections!!
+        </Link>
+      </div>
       <div className={'ProfileCard-Workplace'}>
         {this.props.user.workplace}
       </div>
       <div className={'ProfileCard-Actions'}>
         {this.getCardAction()}
       </div>
+      <Tabs>
+        <Tab icon={<InterestsIcon />} title={'interests'}>
+          <div className='ProfileCard-Favorites'>
+            here are some interests of {this.props.user.name}
+          </div>            
+          <div className={'ProfileCard-Interests'}>
+            {this.renderUserInterests()}
+          </div>
+        </Tab>
+        <Tab icon={<CodeIcon />} title={'programming languages'} >
+          <div className='ProfileCard-Favorites'>
+            {this.props.user.name} likes to code in these languages:
+          </div>
+          <div className={'ProfileCard-TechStack'}>
+            {this.renderProgrammingLanguages()}
+          </div>
+        </Tab>
+      </Tabs>
     </div>
   }
 }

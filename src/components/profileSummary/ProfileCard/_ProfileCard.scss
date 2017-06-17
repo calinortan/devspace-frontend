@@ -40,6 +40,23 @@
         font-size: 18px;
         border-top: 1px solid #393836;
     }
+    &-Favorites {
+        background: #393836;
+        font-size: small;
+        padding: 5px;
+        font-size: small;
+        color:gray;
+    }
+    &-Interests {
+        padding: 5px 15px 5px 15px;
+        box-sizing: border-box;
+        border-top: 1px solid #393836;
+    }
+    &-TechStack {
+        padding: 5px 15px 5px 15px;
+        box-sizing: border-box;
+        border-top: 1px solid #393836;
+    }
     &-Actions {
         padding: 10px 0 10px 20px;
         box-sizing: border-box;

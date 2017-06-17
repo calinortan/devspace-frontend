@@ -7,6 +7,7 @@ class ContentContainer extends Component {
   }
   render() {
     return <section className={'ContentContainer'}>
+      <div>TABS with Routes</div>
       {this.props.children}
     </section>
   }

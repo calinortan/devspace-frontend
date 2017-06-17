@@ -1,4 +1,10 @@
 .SignIn {
+  button {
+    display: inline-block;
+    border: none;
+    height: 30px;
+    border-radius: 3px;
+  }
   display: flex;
   align-items: center;
   justify-content: center;
