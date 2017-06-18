@@ -22,7 +22,7 @@ class DocumentItem extends Component {
       <CardMedia>
         <img src={document.image} alt="" />
       </CardMedia>
-      <CardTitle title={document.title} subtitle='27 January 2017' />
+      <CardTitle title={document.title} subtitle={new Date(document.createdAt).toDateString()} />
       <CardText>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.

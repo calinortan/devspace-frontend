@@ -20,13 +20,14 @@ import SignIn from './components/auth/SignIn.jsx';
 import StatsRoute from './components/stats/Stats.jsx';
 import { AUTH_USER } from './actions/ActionTypes';
 
-const store = createStore(reducers, applyMiddleware(reduxThunk, logger));
+// const store = createStore(reducers, applyMiddleware(reduxThunk, logger));
+const store = createStore(reducers, applyMiddleware(reduxThunk));
 const theme = getMuiTheme(darkBaseTheme, {
   palette: {
     primary1Color: '#32b38c',
     primary2Color: '#32b38c',
-    accent1Color: 'gray',
-    accent2Color: 'gray'
+    accent1Color: '#808080',
+    accent2Color: '#808080'
   }
 });
 

@@ -5,7 +5,8 @@ import firebaseDb from '../firebase';
 import {
   AUTH_USER, AUTH_ERROR, SUBMITTING_AUTH, GET_FRIEND_REQUESTS, FRIEND_REQUEST_SENT,
   UNAUTH_USER, CURRENT_USER, VIEW_USER, LOADING_PROFILE, LOADING_NOTIFIACTIONS,
-  SET_PENDING_REQUEST, ACCEPT_FRIEND_REQUEST, FRIEND_REQUEST_NOTIF, DOCUMENTS_LOADED
+  SET_PENDING_REQUEST, ACCEPT_FRIEND_REQUEST, FRIEND_REQUEST_NOTIF, DOCUMENTS_LOADED,
+  STATS_LOADED
 } from './ActionTypes';
 
 export function signInUser({ email, password }) {
@@ -250,4 +251,26 @@ function documentsLoaded(docs) {
     type: DOCUMENTS_LOADED,
     payload: docs
   }
+}
+
+export function getStatsForUser(userId) {
+  const token = localStorage.getItem('devspace:token');
+  return (dispatch) => {
+    axios({
+      method: 'GET',
+      headers: { 'Authorization': token },
+      url: `https://young-springs-34209.herokuapp.com/api/v1/users/${userId}/stats`
+    }).then(response => {
+        dispatch(statsLoaded(response.data));
+      }).catch((err) => {
+        throw (err);
+      });
+  }
+}
+
+function statsLoaded(docs) {
+  return {
+    type: STATS_LOADED,
+    payload: docs
+  };
 }

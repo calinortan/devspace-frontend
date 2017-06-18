@@ -4,6 +4,7 @@ import AuthReducer from './AuthReducer';
 import ProfileReducer from './ProfileReducer';
 import NotificationsReducer from './NotificationsReducer';
 import WallReducer from './WallReducer';
+import StatsReducer from './StatsReducer';
 
 const rootReducer = combineReducers({
   form: ReduxFormReducer,
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   profile: ProfileReducer,
   notifications: NotificationsReducer,
   content: combineReducers({
-    wall: WallReducer
+    wall: WallReducer,
+    stats: StatsReducer
   })
 });
 

@@ -8,11 +8,12 @@ class UserInterests extends Component {
     super(props);
   }
   renderList() {
-    const { interests } = this.props;
+    const { interests, chipProps } = this.props;
     return interests.map((interest, index) => {
       return <Chip
         key={index}
         style={{margin:4}}
+        {...chipProps}
       >
         {interest}
       </Chip>;
@@ -27,7 +28,8 @@ class UserInterests extends Component {
 
 
 UserInterests.propTypes = {
-  interests: PropTypes.arrayOf(String)
+  interests: PropTypes.arrayOf(String),
+  chipProps: PropTypes.object
 }
 
 export default UserInterests;
