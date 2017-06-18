@@ -51,7 +51,7 @@ class StatsRoute extends Component {
   renderDoughnutChart(statKey, title) {
     const osObject = this.props.statsModel.data[statKey];
     if (osObject == null) {
-      return null;
+      return;
     }
     const data = this.createStatData(osObject)
 
@@ -96,7 +96,7 @@ class StatsRoute extends Component {
   renderProgrammingLangsBarChart() {
     const dataModel = this.props.statsModel.data.programmingLanguages;
     if (dataModel == null) {
-      return null;
+      return;
     }
     const langs = _.sortBy(_.keys(dataModel))
     const data = {
@@ -157,6 +157,15 @@ class StatsRoute extends Component {
       </div>
     </GridTile>
   }
+  renderTiles() {
+    return [this.renderInterestsGridTile(),
+      this.renderDoughnutChart('age', 'Age ranges'),
+      this.renderDoughnutChart('computerOS', 'Computer OS doughnut chart'),
+      this.renderDoughnutChart('mobileOS', 'Mobile OS doughnut chart'),
+      this.renderProgrammingLangsBarChart(),
+      this.renderWorkplacePiechart()
+    ].filter(tile => tile != null);
+  }
   render() {
     if (this.props.statsModel == null) {
       return <div>LOADING</div>;
@@ -169,12 +178,7 @@ class StatsRoute extends Component {
           cellHeight={350}
           padding={1}
         >
-          {this.renderInterestsGridTile()}
-          {this.renderDoughnutChart('age', 'Age ranges')}
-          {this.renderDoughnutChart('computerOS', 'Computer OS doughnut chart')}
-          {this.renderDoughnutChart('mobileOS', 'Mobile OS doughnut chart')}
-          {this.renderProgrammingLangsBarChart()}
-          {this.renderWorkplacePiechart()}
+          {this.renderTiles()}
         </GridList>
       </div>
     </section>

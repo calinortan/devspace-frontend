@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/header/Header.jsx';
 import { db } from './normalizedDb.js';
 import ProfileSummary from './components/profileSummary/ProfileSummary.jsx';
-import RightSidePanel from './components/rightSidePanel/RightSidePanel.jsx';
+import ChatPanel from './components/chatPanel/ChatPanel.jsx';
 import ContentContainer from './components/contentContainer/ContentContainer.jsx';
 import PropTypes from 'prop-types';
 // import io from 'socket.io-client';
@@ -28,7 +28,7 @@ class App extends Component {
           <ContentContainer>
             {this.props.children}
           </ContentContainer>
-          <RightSidePanel />
+          <ChatPanel />
         </div>
       </div>
     );
