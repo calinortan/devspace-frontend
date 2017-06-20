@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import ProfileRouteLinks from './ProfileRouteLinks.jsx'
 
 class ContentContainer extends Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class ContentContainer extends Component {
   }
   render() {
     return <section className={'ContentContainer'}>
-      <div>TABS with Routes</div>
+      <ProfileRouteLinks/>
       {this.props.children}
     </section>
   }

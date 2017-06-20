@@ -9,6 +9,8 @@ import _ from 'lodash';
 import { GridList, GridTile } from 'material-ui/GridList';
 import UserInterests from '../profileSummary/ProfileCard/UserInterests.jsx';
 import { green400, grey300, green100 } from 'material-ui/styles/colors';
+import CircularProgress from 'material-ui/CircularProgress';
+import {Toolbar, ToolbarTitle} from 'material-ui/Toolbar';
 
 class StatsRoute extends Component {
   constructor(props) {
@@ -168,10 +170,12 @@ class StatsRoute extends Component {
   }
   render() {
     if (this.props.statsModel == null) {
-      return <div>LOADING</div>;
+      return <CircularProgress size={80} thickness={5} />;
     }
     return <section className={'StatsRoute'}>
-      <h2>Stats Route</h2>
+      <Toolbar>
+        <ToolbarTitle text='Charts on current connections'/>
+      </Toolbar>
       <div className='StatsRoute-GridList'>
         <GridList
           cols={2}
