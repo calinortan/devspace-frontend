@@ -19,18 +19,7 @@ class ChatUsersList extends Component {
       <List>
       <Subheader>Recent chats</Subheader>
       <ListItem
-        primaryText={<div className='x'>Calin Ortan</div>}
-        leftAvatar={<DevspaceAvatar src={undefined}size={35} style={{top:'5.5px'}} userName='Calin Ortan'/>}
-        rightIcon={<CommunicationChatBubble style={{top:'0'}}/>}
-        style={{
-          fontSize: '14px'
-        }}
-        innerDivStyle={{
-          padding: '15px 56px 15px 72px'
-        }}
-      />
-      <ListItem
-        primaryText={<div className='x'>Calin Ortan</div>}
+        primaryText={<div className='x'>Andrei Ortan</div>}
         leftAvatar={<Avatar src={img} size={35} style={{top:'5.5px'}}/>}
         rightIcon={<CommunicationChatBubble style={{top:'0'}}/>}
         style={{
@@ -41,8 +30,8 @@ class ChatUsersList extends Component {
         }}
       />
       <ListItem
-        primaryText={<div className='x'>Calin Ortan</div>}
-        leftAvatar={<Avatar src={img} size={35} style={{top:'5.5px'}}/>}
+        primaryText={<div className='x'>Alexandra Ulici</div>}
+        leftAvatar={<Avatar src={'https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAO-AAAAJGQwM2VkN2I5LTY5ZDMtNDlkZC05MDNjLWFiOGE0ZWFjYzYzNg.jpg'} size={35} style={{top:'5.5px'}}/>}
         rightIcon={<CommunicationChatBubble style={{top:'0'}}/>}
         style={{
           fontSize: '14px'
@@ -52,8 +41,8 @@ class ChatUsersList extends Component {
         }}
       />
       <ListItem
-        primaryText={<div className='x'>Calin Ortan</div>}
-        leftAvatar={<Avatar src={img} size={35} style={{top:'5.5px'}}/>}
+        primaryText={<div className='x'>Bogdan Roman</div>}
+        leftAvatar={<DevspaceAvatar size={35} style={{top:'5.5px', position:'absolute'}} userName={undefined}/>}
         rightIcon={<CommunicationChatBubble style={{top:'0'}}/>}
         style={{
           fontSize: '14px'
@@ -63,19 +52,8 @@ class ChatUsersList extends Component {
         }}
       />
       <ListItem
-        primaryText={<div className='x'>Calin Ortan</div>}
-        leftAvatar={<DevspaceAvatar src={undefined} size={35} style={{top:'5.5px', position:'absolute'}} userName={undefined}/>}
-        rightIcon={<CommunicationChatBubble style={{top:'0'}}/>}
-        style={{
-          fontSize: '14px'
-        }}
-        innerDivStyle={{
-          padding: '15px 56px 15px 72px'
-        }}
-      />
-      <ListItem
-        primaryText={<div className='x'>Calin Ortan</div>}
-        leftAvatar={<Avatar src={img} size={35} style={{top:'5.5px'}}/>}
+        primaryText={<div className='x'>Vlad Tamas</div>}
+        leftAvatar={<DevspaceAvatar size={35} style={{top:'5.5px', position:'absolute'}} userName={'Vlad Tamas'}/>}
         rightIcon={<CommunicationChatBubble style={{top:'0'}}/>}
         style={{
           fontSize: '14px'
