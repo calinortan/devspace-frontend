@@ -24,8 +24,9 @@
         }
     }
     &-ChatMessages {
-        height: 600px;
+        height: 500px;
         width: 100%;
+        border-top: solid 1px grey;
     }
     @media only screen and (max-width: 1023px) {
         display: none;
@@ -33,3 +34,4 @@
 }
 
 @import './components/ChatUsersList';
+@import './components/Conversation';

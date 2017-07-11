@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getColorObjects } from '../../utils/DevspaceUtils'
+import { getColorObjects } from '../../common/DevspaceUtils'
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { withRouter } from 'react-router';

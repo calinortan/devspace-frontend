@@ -1,0 +1,14 @@
+.Conversation {
+  &-Messages {
+    &-Chip {
+      padding: 5px;
+      display: flex;
+      &-OwnMessage {
+        flex-direction: row-reverse
+      }
+      &-ConnectionMessage {
+        flex-direction: row
+      }
+    }
+  }
+}
