@@ -14,6 +14,7 @@ class ProfileRouteLinks extends Component {
     return <div className={'ProfileRouteLinks'}>
       <Link to={`/${userId}`}><FlatButton label="Wall" primary={true} /></Link>
       <Link to={`/${userId}/stats`}><FlatButton label="Stats" primary={true} /></Link>
+      <Link to={`/${userId}/recommendations`}><FlatButton label="Recommendations" primary={true} /></Link>
     </div>
   }
 }

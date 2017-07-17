@@ -18,6 +18,7 @@ import ReactDOM from 'react-dom';
 import RequireAuth from './components/auth/RequireAuth';
 import SignIn from './components/auth/SignIn.jsx';
 import StatsRoute from './components/stats/Stats.jsx';
+import RecommendationRoute from './components/recommendationRoute/RecommendationRoute.jsx';
 import { AUTH_USER } from './actions/ActionTypes';
 
 // const store = createStore(reducers, applyMiddleware(reduxThunk, logger));
@@ -58,6 +59,7 @@ ReactDOM.render((
           <Route path='/:user_id' >
             <IndexRoute component={WallContent} />
             <Route path='/:user_id/stats' component={StatsRoute}/>
+            <Route path='/:user_id/recommendations' component={RecommendationRoute}/>
           </Route>
         </Route>
       </Router>
